@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实习申请表</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 25px;
+            padding: 12px 20px;
+            background: linear-gradient(to right, rgba(102, 213, 117, 0.1), transparent);
+            border-left: 8px solid #66D575;
+            border-radius: 0 8px 8px 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px;
+        }
+        .form-item {
+            flex: 1;
+            min-width: 200px;
+            padding: 0 10px;
+            margin-bottom: 15px;
+        }
+        .label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .full-width {
+            flex: 1 1 100%;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        .submit-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        /* 统一按钮样式 */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            margin: 0 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: #66D575;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #58C468;
+        }
+        
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+
+        .btn-print {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-print:hover {
+            background-color: #2980b9;
+        }
+
+        /* 签名按钮样式 */
+        .btn-sign {
+            background-color: #66D575;
+            color: white;
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-sign:hover {
+            background-color: #58C468;
+        }
+
+        /* 签名显示区域 */
+        .signature-display {
+            width: 100%;
+            height: 60px;
+            border: 1px dashed #ddd;
+            border-radius: 4px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+            background-color: #fafafa;
+        }
+
+        .signature-display.has-signature {
+            border-style: solid;
+            border-color: #66D575;
+            color: #333;
+        }
+
+        /* 日期选择按钮 */
+        .btn-date {
+            background-color: #66D575;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .btn-date:hover {
+            background-color: #58C468;
+        }
+
+        /* 附件预览区域 */
+        .attachment-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .attachment-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+
+        .attachment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .attachment-item {
+            background-color: #66D575;
+            color: white;
+            padding: 25px 15px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .attachment-item:hover {
+            background-color: #58C468;
+        }
+
+        .attachment-icon {
+            font-size: 24px;
+        }
+
+        .attachment-name {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .attachment-desc {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        /* 数据操作按钮 */
+        .data-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-data {
+            background-color: #66D575;
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-data:hover {
+            background-color: #58C468;
+        }
+
+        .btn-data.delete {
+            background-color: #e74c3c;
+        }
+
+        .btn-data.delete:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-data.import {
+            background-color: #3498db;
+        }
+
+        .btn-data.import:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-data.export {
+            background-color: #9b59b6;
+        }
+
+        .btn-data.export:hover {
+            background-color: #8e44ad;
+        }
+
+        /* 签名弹窗样式 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .modal-close {
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .canvas-container {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        #signatureCanvas {
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn-clear {
+            background-color: #95a5a6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-confirm {
+            background-color: #66D575;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+                max-width: 100%;
+                padding: 0;
+            }
+            .form-container {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                padding: 15px;
+            }
+            .submit-section,
+            .attachment-section,
+            .data-buttons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 5px;">附件8：</p>
+        <h1 style="text-align: center; color: #2c3e50;">成都纺织高等专科学校学生自主联系岗位实习申请表</h1>
+        
+        <form>
+            <!-- 一、个人信息 -->
+            <div class="form-section">
+                <div class="section-title">一、个人信息</div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">学生姓名</label>
+                            <input type="text" name="studentName" placeholder="请输入学生姓名">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">联系电话</label>
+                            <input type="tel" name="phone" placeholder="请输入联系电话">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">身份证号</label>
+                            <input type="text" name="idCard" placeholder="请输入身份证号">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">家庭住址</label>
+                            <input type="text" name="homeAddress" placeholder="请输入家庭住址">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">监护人姓名</label>
+                            <input type="text" name="guardianName" placeholder="请输入监护人姓名">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">监护人联系电话</label>
+                            <input type="tel" name="guardianPhone" placeholder="请输入监护人联系电话">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">监护人身份证号</label>
+                            <input type="text" name="guardianIdCard" placeholder="请输入监护人身份证号">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">监护人住址</label>
+                            <input type="text" name="guardianAddress" placeholder="请输入监护人住址">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">与学生关系</label>
+                            <input type="text" name="relationship" placeholder="请输入与学生关系">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 二、学校信息 -->
+            <div class="form-section">
+                <div class="section-title">二、学校信息</div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">学校名称</label>
+                            <input type="text" name="schoolName" value="成都纺织高等专科学校" readonly>
+                        </div>
+                        <div class="form-item">
+                            <label class="label">学校地址</label>
+                            <input type="text" name="schoolAddress" value="四川省成都市郫都区犀浦街道泰山南街186号，邮政编码：611731" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">邮政编码</label>
+                            <input type="text" name="postalCode" value="611731" readonly>
+                        </div>
+                        <div class="form-item">
+                            <label class="label">学院名称</label>
+                            <input type="text" name="collegeName" value="电气信息工程学院" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">学院电话</label>
+                            <input type="tel" name="collegePhone" value="028-87848410" readonly>
+                        </div>
+                        <div class="form-item">
+                            <label class="label">学院邮箱</label>
+                            <input type="email" name="collegeEmail" value="yaolingfeng@cdtc.edu.cn" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">专业</label>
+                            <input type="text" name="major" placeholder="请输入专业">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">年级</label>
+                            <input type="text" name="grade" placeholder="请输入年级">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">班级</label>
+                            <input type="text" name="class" placeholder="请输入班级">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">学号</label>
+                            <input type="text" name="studentId" placeholder="请输入学号">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">辅导员/班主任</label>
+                            <input type="text" name="instructor" placeholder="请输入辅导员/班主任">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">辅导员联系电话</label>
+                            <input type="tel" name="instructorPhone" placeholder="请输入辅导员联系电话">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">实习指导教师</label>
+                            <input type="text" name="internTeacher" placeholder="请输入实习指导教师">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">实习指导教师联系电话</label>
+                            <input type="tel" name="internTeacherPhone" placeholder="请输入实习指导教师联系电话">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 三、实习信息 -->
+            <div class="form-section">
+                <div class="section-title">三、实习信息</div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">实习单位</label>
+                            <input type="text" name="companyName" placeholder="请输入实习单位">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">单位地址</label>
+                            <input type="text" name="companyAddress" placeholder="请输入单位地址">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">单位性质</label>
+                            <input type="text" name="companyType" placeholder="请输入单位性质">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">行业范围</label>
+                            <input type="text" name="industry" placeholder="请输入行业范围">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">实习岗位</label>
+                            <input type="text" name="position" placeholder="请输入实习岗位">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">实习项目</label>
+                            <input type="text" name="project" value="岗位实习" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">单位联系人</label>
+                            <input type="text" name="contactPerson" placeholder="请输入单位联系人">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">联系电话</label>
+                            <input type="tel" name="contactPhone" placeholder="请输入联系电话">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">实习开始时间</label>
+                            <button type="button" class="btn btn-date" onclick="selectDate('startDate')">选择日期</button>
+                            <input type="hidden" name="startDate" id="startDate">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">实习结束时间</label>
+                            <button type="button" class="btn btn-date" onclick="selectDate('endDate')">选择日期</button>
+                            <input type="hidden" name="endDate" id="endDate">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">上午工作时间</label>
+                            <input type="text" name="morningHours" value="08:00-12:00" readonly>
+                        </div>
+                        <div class="form-item">
+                            <label class="label">下午工作时间</label>
+                            <input type="text" name="afternoonHours" value="13:00-17:00" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">实习报酬</label>
+                            <input type="text" name="compensation" placeholder="请输入实习报酬">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">支付方式</label>
+                            <input type="text" name="paymentMethod" placeholder="请输入支付方式">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">支付周期</label>
+                            <input type="text" name="paymentCycle" placeholder="请输入支付周期">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">支付时间</label>
+                            <input type="text" name="paymentTime" placeholder="请输入支付时间">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">就餐条件</label>
+                            <input type="text" name="diningCondition" placeholder="请输入就餐条件">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">住宿条件</label>
+                            <input type="text" name="accommodation" placeholder="请输入住宿条件">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">就业意向</label>
+                            <input type="text" name="employmentIntent" placeholder="请输入就业意向">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">交通补贴</label>
+                            <input type="text" name="transportationSubsidy" placeholder="请输入交通补贴">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 四、保险信息 -->
+            <div class="form-section">
+                <div class="section-title">四、保险信息</div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-item full-width">
+                            <label class="label">人身意外伤害保险</label>
+                            <input type="text" name="insurance" placeholder="请输入人身意外伤害保险">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">保险公司</label>
+                            <input type="text" name="insuranceCompany" placeholder="请输入保险公司">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">保险单号</label>
+                            <input type="text" name="policyNumber" placeholder="请输入保险单号">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 五、自主联系实习理由 -->
+            <div class="form-section">
+                <div class="section-title">五、自主联系实习理由</div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-item full-width">
+                            <label class="label">理由（默认内容，可修改）</label>
+                            <textarea name="reason" readonly>本人自主联系到实习单位，该单位能够提供与所学专业相关的实习岗位，有利于提升专业技能和实践能力。实习单位管理规范，能够保障实习期间的安全和权益。本人承诺严格遵守学校和实习单位的各项规章制度，认真完成实习任务。</textarea>
+                        </div>
+                        <div class="form-item full-width">
+                            <label class="label">承诺（默认内容，可修改）</label>
+                            <textarea name="commitment" readonly>本人在实习期间，严格遵守国家法律法规和学校及实习单位的各项规章制度，完成好实习任务；注意生产安全和人身安全，并对自己在实习期间的行为和安全负责，自学应修课程；实习结束后，按时返校，办理相关手续。</textarea>
+                        </div>
+                        <div class="form-item full-width">
+                            <label class="label">监护人意见（默认内容，可修改）</label>
+                            <textarea name="guardianOpinion" readonly>知道孩子的情况，同意孩子的意见。孩子在实习期间，我们将与其保持联系，叮嘱其注意安全，遵守法纪、校规，要求其密切保持和辅导员（班主任）、学院的联系，保证通讯渠道顺畅，按期完成岗位实习任务，出现安全责任、违规所造成的后果自负，与学校无关。(注：确因距离远，监护人不能来校签字的，辅导员（班主任）必须与监护人联系，做好通话记录，取得监护人同意后，由辅导员（班主任）代签，须注明"受监护人委托代为签字"。)</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 六、签名审批 -->
+            <div class="form-section">
+                <div class="section-title">六、签名审批</div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">承诺人签名</label>
+                            <button type="button" class="btn btn-sign" onclick="openSignatureModal('commitment')">
+                                <span>✏️</span> 点击签名
+                            </button>
+                            <div class="signature-display" id="commitmentSignature">暂无签名</div>
+                            <button type="button" class="btn btn-date" onclick="selectDate('commitmentDate')">选择日期</button>
+                            <input type="hidden" name="commitmentDate" id="commitmentDate">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">监护人签名</label>
+                            <button type="button" class="btn btn-sign" onclick="openSignatureModal('guardian')">
+                                <span>✏️</span> 点击签名
+                            </button>
+                            <div class="signature-display" id="guardianSignature">暂无签名</div>
+                            <button type="button" class="btn btn-date" onclick="selectDate('guardianDate')">选择日期</button>
+                            <input type="hidden" name="guardianDate" id="guardianDate">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">学院院长签名</label>
+                            <button type="button" class="btn btn-sign" onclick="openSignatureModal('dean')">
+                                <span>✏️</span> 点击签名
+                            </button>
+                            <div class="signature-display" id="deanSignature">暂无签名</div>
+                            <button type="button" class="btn btn-date" onclick="selectDate('deanDate')">选择日期</button>
+                            <input type="hidden" name="deanDate" id="deanDate">
+                        </div>
+                        <div class="form-item">
+                            <label class="label">党总支书记签名</label>
+                            <button type="button" class="btn btn-sign" onclick="openSignatureModal('secretary')">
+                                <span>✏️</span> 点击签名
+                            </button>
+                            <div class="signature-display" id="secretarySignature">暂无签名</div>
+                            <button type="button" class="btn btn-date" onclick="selectDate('secretaryDate')">选择日期</button>
+                            <input type="hidden" name="secretaryDate" id="secretaryDate">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-item">
+                            <label class="label">企业法定代表人签名</label>
+                            <button type="button" class="btn btn-sign" onclick="openSignatureModal('companyLegal')">
+                                <span>✏️</span> 点击签名
+                            </button>
+                            <div class="signature-display" id="companyLegalSignature">暂无签名</div>
+                            <button type="button" class="btn btn-date" onclick="selectDate('companyLegalDate')">选择日期</button>
+                            <input type="hidden" name="companyLegalDate" id="companyLegalDate">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 附件预览 -->
+            <div class="attachment-section">
+                <div class="attachment-title">附件预览</div>
+                <div class="attachment-grid">
+                    <div class="attachment-item" onclick="previewAttachment('附件8')">
+                        <span class="attachment-icon">📄</span>
+                        <span class="attachment-name">附件8</span>
+                        <span class="attachment-desc">实习审核表</span>
+                    </div>
+                    <div class="attachment-item" onclick="previewAttachment('附件7')">
+                        <span class="attachment-icon">📄</span>
+                        <span class="attachment-name">附件7</span>
+                        <span class="attachment-desc">安全责任书</span>
+                    </div>
+                    <div class="attachment-item" onclick="previewAttachment('附件6')">
+                        <span class="attachment-icon">📄</span>
+                        <span class="attachment-name">附件6</span>
+                        <span class="attachment-desc">三方协议</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 数据操作按钮 -->
+            <div class="data-buttons">
+                <button type="button" class="btn btn-data delete" onclick="clearData()">
+                    <span>🗑️</span> 清空数据
+                </button>
+                <button type="button" class="btn btn-data" onclick="saveData()">
+                    <span>💾</span> 保存数据
+                </button>
+                <button type="button" class="btn btn-data import" onclick="importData()">
+                    <span>📥</span> 导入数据
+                </button>
+                <button type="button" class="btn btn-data export" onclick="exportData()">
+                    <span>📤</span> 导出数据
+                </button>
+            </div>
+            
+            <!-- 提交按钮 -->
+            <div class="submit-section">
+                <button type="submit" class="btn btn-primary">提交申请</button>
+                <button type="button" class="btn btn-secondary" onclick="previewForm()">预览</button>
+                <button type="button" class="btn btn-print" onclick="printForm()">打印表单</button>
+            </div>
+            
+        </form>
+    </div>
+
+    <!-- 签名弹窗 -->
+    <div class="modal-overlay" id="signatureModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">签名</span>
+                <span class="modal-close" onclick="closeSignatureModal()">×</span>
+            </div>
+            <div class="canvas-container">
+                <canvas id="signatureCanvas" width="450" height="200"></canvas>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-clear" onclick="clearCanvas()">清除</button>
+                <button class="btn-confirm" onclick="confirmSignature()">确认签名</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSignatureField = '';
+        let canvas, ctx;
+        
+        // 初始化签名画布
+        function initCanvas() {
+            canvas = document.getElementById('signatureCanvas');
+            ctx = canvas.getContext('2d');
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+            
+            canvas.addEventListener('mousedown', (e) => {
+                isDrawing = true;
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+            });
+            
+            canvas.addEventListener('mousemove', (e) => {
+                if (!isDrawing) return;
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+            });
+            
+            canvas.addEventListener('mouseup', () => isDrawing = false);
+            canvas.addEventListener('mouseout', () => isDrawing = false);
+            
+            // 触摸支持
+            canvas.addEventListener('touchstart', (e) => {
+                isDrawing = true;
+                const touch = e.touches[0];
+                [lastX, lastY] = [touch.clientX - canvas.offsetLeft, touch.clientY - canvas.offsetTop];
+            });
+            
+            canvas.addEventListener('touchmove', (e) => {
+                if (!isDrawing) return;
+                e.preventDefault();
+                const touch = e.touches[0];
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(touch.clientX - canvas.offsetLeft, touch.clientY - canvas.offsetTop);
+                ctx.stroke();
+                [lastX, lastY] = [touch.clientX - canvas.offsetLeft, touch.clientY - canvas.offsetTop];
+            });
+            
+            canvas.addEventListener('touchend', () => isDrawing = false);
+        }
+        
+        // 打开签名弹窗
+        function openSignatureModal(field) {
+            currentSignatureField = field;
+            clearCanvas();
+            document.getElementById('signatureModal').classList.add('show');
+        }
+        
+        // 关闭签名弹窗
+        function closeSignatureModal() {
+            document.getElementById('signatureModal').classList.remove('show');
+        }
+        
+        // 清除画布
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        // 确认签名
+        function confirmSignature() {
+            const signatureData = canvas.toDataURL();
+            const displayDiv = document.getElementById(currentSignatureField + 'Signature');
+            displayDiv.innerHTML = '<img src="' + signatureData + '" style="max-height: 50px;"/>';
+            displayDiv.classList.add('has-signature');
+            closeSignatureModal();
+        }
+        
+        // 选择日期
+        function selectDate(fieldId) {
+            const date = new Date().toISOString().split('T')[0];
+            document.getElementById(fieldId).value = date;
+            const btn = event.target;
+            btn.innerHTML = date;
+        }
+        
+        // 预览表单
+        function previewForm() {
+            const previewWindow = window.open('', '_blank');
+            if (!previewWindow) {
+                alert('请允许弹出窗口以预览表单');
+                return;
+            }
+            
+            previewWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="zh-CN">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>实习申请表预览</title>
+                    <style>
+                        body {
+                            font-family: "Microsoft YaHei", sans-serif;
+                            line-height: 1.6;
+                            color: #333;
+                            max-width: 800px;
+                            margin: 0 auto;
+                            padding: 20px;
+                            background-color: #fff;
+                        }
+                        .form-container {
+                            background: white;
+                            padding: 30px;
+                            border-radius: 8px;
+                            border: 1px solid #ddd;
+                        }
+                        .section-title {
+                            font-size: 18px;
+                            font-weight: bold;
+                            color: #2d3748;
+                            margin-bottom: 20px;
+                            padding: 10px 15px;
+                            background: linear-gradient(to right, rgba(102, 213, 117, 0.1), transparent);
+                            border-left: 6px solid #66D575;
+                            border-radius: 0 6px 6px 0;
+                        }
+                        .form-row {
+                            display: flex;
+                            flex-wrap: wrap;
+                            margin: 0 -8px;
+                        }
+                        .form-item {
+                            flex: 1;
+                            min-width: 180px;
+                            padding: 0 8px;
+                            margin-bottom: 12px;
+                        }
+                        .label {
+                            display: block;
+                            font-weight: bold;
+                            margin-bottom: 4px;
+                            color: #555;
+                            font-size: 13px;
+                        }
+                        .value {
+                            font-size: 14px;
+                            color: #333;
+                            padding: 6px 8px;
+                            background-color: #f9f9f9;
+                            border-radius: 4px;
+                            border: 1px solid #eee;
+                        }
+                        h1 {
+                            text-align: center;
+                            color: #2c3e50;
+                            font-size: 20px;
+                        }
+                        .subtitle {
+                            text-align: center;
+                            color: #666;
+                            font-size: 13px;
+                            margin-bottom: 5px;
+                        }
+                        .print-btn {
+                            display: block;
+                            margin: 20px auto;
+                            padding: 10px 25px;
+                            background-color: #66D575;
+                            color: white;
+                            border: none;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            font-size: 16px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="form-container">
+                        <p class="subtitle">附件8：</p>
+                        <h1>成都纺织高等专科学校学生自主联系岗位实习申请表</h1>
+            `);
+            
+            const form = document.querySelector('form');
+            const sections = form.querySelectorAll('.form-section');
+            
+            sections.forEach(section => {
+                const title = section.querySelector('.section-title').textContent;
+                previewWindow.document.write(`<div class="form-section"><div class="section-title">${title}</div>`);
+                
+                const formRows = section.querySelectorAll('.form-row');
+                formRows.forEach(row => {
+                    previewWindow.document.write('<div class="form-row">');
+                    const items = row.querySelectorAll('.form-item');
+                    items.forEach(item => {
+                        const label = item.querySelector('.label');
+                        const input = item.querySelector('input[type="text"], input[type="tel"], textarea');
+                        const signatureDisplay = item.querySelector('.signature-display');
+                        
+                        if (label) {
+                            const labelText = label.textContent;
+                            let value = '(未填写)';
+                            
+                            if (input) {
+                                value = input.value || '(未填写)';
+                            } else if (signatureDisplay) {
+                                value = signatureDisplay.innerHTML.includes('img') ? '✓ 已签名' : '未签名';
+                            }
+                            
+                            previewWindow.document.write(`
+                                <div class="form-item">
+                                    <div class="label">${labelText}</div>
+                                    <div class="value">${value}</div>
+                                </div>
+                            `);
+                        }
+                    });
+                    previewWindow.document.write('</div>');
+                });
+                
+                previewWindow.document.write('</div>');
+            });
+            
+            previewWindow.document.write(`
+                        <button class="print-btn" onclick="window.print()">打印表单</button>
+                    </div>
+                </body>
+                </html>
+            `);
+            previewWindow.document.close();
+        }
+
+        // 打印表单
+        function printForm() {
+            window.print();
+        }
+
+        // 清空数据
+        function clearData() {
+            if (confirm('确定要清空所有数据吗？')) {
+                document.querySelector('form').reset();
+                document.querySelectorAll('.signature-display').forEach(el => {
+                    el.innerHTML = '暂无签名';
+                    el.classList.remove('has-signature');
+                });
+                document.querySelectorAll('.btn-date').forEach(btn => {
+                    btn.innerHTML = '选择日期';
+                });
+            }
+        }
+
+        // 保存数据
+        function saveData() {
+            const formData = {};
+            document.querySelectorAll('input, textarea').forEach(el => {
+                if (el.name) {
+                    formData[el.name] = el.value;
+                }
+            });
+            
+            document.querySelectorAll('.signature-display').forEach(el => {
+                if (el.classList.contains('has-signature')) {
+                    formData[el.id] = el.innerHTML;
+                }
+            });
+            
+            localStorage.setItem('internshipFormData', JSON.stringify(formData));
+            alert('数据保存成功！');
+        }
+
+        // 导入数据
+        function importData() {
+            const savedData = localStorage.getItem('internshipFormData');
+            if (!savedData) {
+                alert('没有找到保存的数据');
+                return;
+            }
+            
+            const formData = JSON.parse(savedData);
+            
+            document.querySelectorAll('input, textarea').forEach(el => {
+                if (el.name && formData[el.name]) {
+                    el.value = formData[el.name];
+                }
+            });
+            
+            document.querySelectorAll('.signature-display').forEach(el => {
+                if (formData[el.id]) {
+                    el.innerHTML = formData[el.id];
+                    el.classList.add('has-signature');
+                }
+            });
+            
+            alert('数据导入成功！');
+        }
+
+        // 导出数据
+        function exportData() {
+            const formData = {};
+            document.querySelectorAll('input, textarea').forEach(el => {
+                if (el.name) {
+                    formData[el.name] = el.value;
+                }
+            });
+            
+            document.querySelectorAll('.signature-display').forEach(el => {
+                if (el.classList.contains('has-signature')) {
+                    formData[el.id] = el.innerHTML;
+                }
+            });
+            
+            const blob = new Blob([JSON.stringify(formData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'internship-form-data.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            alert('数据导出成功！');
+        }
+
+        // 表单提交
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('表单提交成功！');
+        });
+
+        // 预览附件
+        function previewAttachment(attachmentName) {
+            alert('正在预览' + attachmentName + '...\n\n该功能需要后端支持文档预览服务。');
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', initCanvas);
+    </script>
+</body>
+</html>
